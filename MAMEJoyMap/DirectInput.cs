@@ -24,7 +24,7 @@ namespace MAMEJoyMap
         private DInput.Device[] m_joyDevice = null;
 
         private int m_joyCount = 0;
-        private Timer m_timer = null;
+        private System.Timers.Timer m_timer = null;
 
         private const int MAX_JOYSTICKS = 8;
 
@@ -63,7 +63,7 @@ namespace MAMEJoyMap
                     m_joyCount++;
                 }
 
-                m_timer = new Timer(50);
+                m_timer = new System.Timers.Timer(50);
                 m_timer.Elapsed += new ElapsedEventHandler(OnTimerElapsed);
                 m_timer.SynchronizingObject = control;
                 m_timer.Start();
