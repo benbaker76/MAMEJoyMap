@@ -199,7 +199,7 @@ namespace MAMEJoyMap
             // toolStripStatusLabel1
             // 
             toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            toolStripStatusLabel1.Size = new Size(369, 17);
+            toolStripStatusLabel1.Size = new Size(320, 17);
             toolStripStatusLabel1.Spring = true;
             toolStripStatusLabel1.TextAlign = ContentAlignment.MiddleLeft;
             // 
@@ -238,7 +238,6 @@ namespace MAMEJoyMap
             MinimizeBox = false;
             Name = "frmMain";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "MAME Joystick Mapper v1.4";
             Load += frmMain_Load;
             mnuMain.ResumeLayout(false);
             mnuMain.PerformLayout();

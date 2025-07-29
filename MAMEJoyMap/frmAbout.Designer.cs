@@ -28,42 +28,44 @@ namespace MAMEJoyMap
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblAbout = new System.Windows.Forms.Label();
-            this.butOkay = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            lblAbout = new Label();
+            butOkay = new Button();
+            SuspendLayout();
             // 
             // lblAbout
             // 
-            this.lblAbout.Location = new System.Drawing.Point(12, 7);
-            this.lblAbout.Name = "lblAbout";
-            this.lblAbout.Size = new System.Drawing.Size(145, 49);
-            this.lblAbout.TabIndex = 0;
-            this.lblAbout.Text = "MAME Joystick Mapper v1.4\r\nBy Ben Baker";
-            this.lblAbout.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            lblAbout.Location = new Point(14, 8);
+            lblAbout.Margin = new Padding(4, 0, 4, 0);
+            lblAbout.Name = "lblAbout";
+            lblAbout.Size = new Size(169, 57);
+            lblAbout.TabIndex = 0;
+            lblAbout.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // butOkay
             // 
-            this.butOkay.Location = new System.Drawing.Point(27, 62);
-            this.butOkay.Name = "butOkay";
-            this.butOkay.Size = new System.Drawing.Size(111, 29);
-            this.butOkay.TabIndex = 1;
-            this.butOkay.Text = "OK";
-            this.butOkay.UseVisualStyleBackColor = true;
-            this.butOkay.Click += new System.EventHandler(this.butOkay_Click);
+            butOkay.Location = new Point(31, 72);
+            butOkay.Margin = new Padding(4, 3, 4, 3);
+            butOkay.Name = "butOkay";
+            butOkay.Size = new Size(130, 33);
+            butOkay.TabIndex = 1;
+            butOkay.Text = "OK";
+            butOkay.UseVisualStyleBackColor = true;
+            butOkay.Click += butOkay_Click;
             // 
             // frmAbout
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(166, 100);
-            this.Controls.Add(this.butOkay);
-            this.Controls.Add(this.lblAbout);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "frmAbout";
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "About";
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(194, 115);
+            Controls.Add(butOkay);
+            Controls.Add(lblAbout);
+            FormBorderStyle = FormBorderStyle.FixedToolWindow;
+            Margin = new Padding(4, 3, 4, 3);
+            Name = "frmAbout";
+            ShowInTaskbar = false;
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "About";
+            ResumeLayout(false);
 
         }
 

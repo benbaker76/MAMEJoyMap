@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using System.Reflection;
 
 namespace MAMEJoyMap
 {
@@ -48,6 +49,10 @@ namespace MAMEJoyMap
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            var version = Assembly.GetExecutingAssembly().GetName().Version;
+
+            this.Text = String.Format("{0} {1}", Application.ProductName, version.ToString(3));
+
             _directInputManager = new DirectInputManager(this);
             _directInputManager.OnJoyInput += new DirectInputManager.DIJoyButtonDownHandler(OnJoyInput);
 
