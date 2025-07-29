@@ -1,6 +1,6 @@
 # MAME Joystick Map Editor
 
-![](/images/mamejoymap.png)
+![](/.github/img/mamejoymap.png)
 
 This is a MAME joystick map editor. Loads/Saves MAME ini files that can specify a control map for specific games. Some example ini files included. Save the ini files to the MAME\'s ini folder (create an ini folder if it\'s not there). Name the file [ROM].ini.
 Features
