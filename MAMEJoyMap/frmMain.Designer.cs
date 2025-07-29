@@ -28,233 +28,227 @@ namespace MAMEJoyMap
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-            this.mnuMain = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuOpen = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuSaveAs = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuSave = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuMaps = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuClear = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnu4WayDiagonal = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu4WaySticky = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu8Way = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuAbout = new System.Windows.Forms.ToolStripMenuItem();
-            this.picMain = new System.Windows.Forms.PictureBox();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.picKey = new System.Windows.Forms.PictureBox();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.picMario = new System.Windows.Forms.PictureBox();
-            this.mnuMain.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picMain)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picKey)).BeginInit();
-            this.statusStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picMario)).BeginInit();
-            this.SuspendLayout();
+            mnuMain = new MenuStrip();
+            fileToolStripMenuItem = new ToolStripMenuItem();
+            mnuOpen = new ToolStripMenuItem();
+            mnuSaveAs = new ToolStripMenuItem();
+            mnuSave = new ToolStripMenuItem();
+            mnuMaps = new ToolStripMenuItem();
+            mnuClear = new ToolStripMenuItem();
+            toolStripMenuItem1 = new ToolStripSeparator();
+            mnu4WayDiagonal = new ToolStripMenuItem();
+            mnu4WaySticky = new ToolStripMenuItem();
+            mnu8Way = new ToolStripMenuItem();
+            mnuAbout = new ToolStripMenuItem();
+            picMain = new PictureBox();
+            imageList1 = new ImageList(components);
+            picKey = new PictureBox();
+            statusStrip1 = new StatusStrip();
+            toolStripStatusLabel1 = new ToolStripStatusLabel();
+            toolStripStatusLabel2 = new ToolStripStatusLabel();
+            picMario = new PictureBox();
+            mnuMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)picMain).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)picKey).BeginInit();
+            statusStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)picMario).BeginInit();
+            SuspendLayout();
             // 
             // mnuMain
             // 
-            this.mnuMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.mnuMaps,
-            this.mnuAbout});
-            this.mnuMain.Location = new System.Drawing.Point(0, 0);
-            this.mnuMain.Name = "mnuMain";
-            this.mnuMain.Size = new System.Drawing.Size(331, 24);
-            this.mnuMain.TabIndex = 0;
-            this.mnuMain.Text = "menuStrip1";
+            mnuMain.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, mnuMaps, mnuAbout });
+            mnuMain.Location = new Point(0, 0);
+            mnuMain.Name = "mnuMain";
+            mnuMain.Padding = new Padding(7, 2, 0, 2);
+            mnuMain.Size = new Size(337, 24);
+            mnuMain.TabIndex = 0;
+            mnuMain.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuOpen,
-            this.mnuSaveAs,
-            this.mnuSave});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "File";
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { mnuOpen, mnuSaveAs, mnuSave });
+            fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            fileToolStripMenuItem.Size = new Size(37, 20);
+            fileToolStripMenuItem.Text = "File";
             // 
             // mnuOpen
             // 
-            this.mnuOpen.Name = "mnuOpen";
-            this.mnuOpen.Size = new System.Drawing.Size(123, 22);
-            this.mnuOpen.Text = "Open";
-            this.mnuOpen.Click += new System.EventHandler(this.mnuOpen_Click);
+            mnuOpen.Name = "mnuOpen";
+            mnuOpen.Size = new Size(123, 22);
+            mnuOpen.Text = "Open";
+            mnuOpen.Click += mnuOpen_Click;
             // 
             // mnuSaveAs
             // 
-            this.mnuSaveAs.Name = "mnuSaveAs";
-            this.mnuSaveAs.Size = new System.Drawing.Size(123, 22);
-            this.mnuSaveAs.Text = "Save As...";
-            this.mnuSaveAs.Click += new System.EventHandler(this.mnuSaveAs_Click);
+            mnuSaveAs.Name = "mnuSaveAs";
+            mnuSaveAs.Size = new Size(123, 22);
+            mnuSaveAs.Text = "Save As...";
+            mnuSaveAs.Click += mnuSaveAs_Click;
             // 
             // mnuSave
             // 
-            this.mnuSave.Name = "mnuSave";
-            this.mnuSave.Size = new System.Drawing.Size(123, 22);
-            this.mnuSave.Text = "Save";
-            this.mnuSave.Click += new System.EventHandler(this.mnuSave_Click);
+            mnuSave.Name = "mnuSave";
+            mnuSave.Size = new Size(123, 22);
+            mnuSave.Text = "Save";
+            mnuSave.Click += mnuSave_Click;
             // 
             // mnuMaps
             // 
-            this.mnuMaps.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuClear,
-            this.toolStripMenuItem1,
-            this.mnu4WayDiagonal,
-            this.mnu4WaySticky,
-            this.mnu8Way});
-            this.mnuMaps.Name = "mnuMaps";
-            this.mnuMaps.Size = new System.Drawing.Size(48, 20);
-            this.mnuMaps.Text = "Maps";
+            mnuMaps.DropDownItems.AddRange(new ToolStripItem[] { mnuClear, toolStripMenuItem1, mnu4WayDiagonal, mnu4WaySticky, mnu8Way });
+            mnuMaps.Name = "mnuMaps";
+            mnuMaps.Size = new Size(48, 20);
+            mnuMaps.Text = "Maps";
             // 
             // mnuClear
             // 
-            this.mnuClear.Name = "mnuClear";
-            this.mnuClear.Size = new System.Drawing.Size(156, 22);
-            this.mnuClear.Text = "Clear";
-            this.mnuClear.Click += new System.EventHandler(this.mnuClear_Click);
+            mnuClear.Name = "mnuClear";
+            mnuClear.Size = new Size(156, 22);
+            mnuClear.Text = "Clear";
+            mnuClear.Click += mnuClear_Click;
             // 
             // toolStripMenuItem1
             // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(153, 6);
+            toolStripMenuItem1.Name = "toolStripMenuItem1";
+            toolStripMenuItem1.Size = new Size(153, 6);
             // 
             // mnu4WayDiagonal
             // 
-            this.mnu4WayDiagonal.Name = "mnu4WayDiagonal";
-            this.mnu4WayDiagonal.Size = new System.Drawing.Size(156, 22);
-            this.mnu4WayDiagonal.Text = "4 Way Diagonal";
-            this.mnu4WayDiagonal.Click += new System.EventHandler(this.mnu4WayDiagonal_Click);
+            mnu4WayDiagonal.Name = "mnu4WayDiagonal";
+            mnu4WayDiagonal.Size = new Size(156, 22);
+            mnu4WayDiagonal.Text = "4 Way Diagonal";
+            mnu4WayDiagonal.Click += mnu4WayDiagonal_Click;
             // 
             // mnu4WaySticky
             // 
-            this.mnu4WaySticky.Name = "mnu4WaySticky";
-            this.mnu4WaySticky.Size = new System.Drawing.Size(156, 22);
-            this.mnu4WaySticky.Text = "4 Way Sticky";
-            this.mnu4WaySticky.Click += new System.EventHandler(this.mnu4WaySticky_Click);
+            mnu4WaySticky.Name = "mnu4WaySticky";
+            mnu4WaySticky.Size = new Size(156, 22);
+            mnu4WaySticky.Text = "4 Way Sticky";
+            mnu4WaySticky.Click += mnu4WaySticky_Click;
             // 
             // mnu8Way
             // 
-            this.mnu8Way.Name = "mnu8Way";
-            this.mnu8Way.Size = new System.Drawing.Size(156, 22);
-            this.mnu8Way.Text = "8 Way";
-            this.mnu8Way.Click += new System.EventHandler(this.mnu8Way_Click);
+            mnu8Way.Name = "mnu8Way";
+            mnu8Way.Size = new Size(156, 22);
+            mnu8Way.Text = "8 Way";
+            mnu8Way.Click += mnu8Way_Click;
             // 
             // mnuAbout
             // 
-            this.mnuAbout.Name = "mnuAbout";
-            this.mnuAbout.Size = new System.Drawing.Size(52, 20);
-            this.mnuAbout.Text = "About";
-            this.mnuAbout.Click += new System.EventHandler(this.mnuAbout_Click);
+            mnuAbout.Name = "mnuAbout";
+            mnuAbout.Size = new Size(52, 20);
+            mnuAbout.Text = "About";
+            mnuAbout.Click += mnuAbout_Click;
             // 
             // picMain
             // 
-            this.picMain.BackColor = System.Drawing.Color.Black;
-            this.picMain.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.picMain.Location = new System.Drawing.Point(12, 41);
-            this.picMain.Name = "picMain";
-            this.picMain.Size = new System.Drawing.Size(217, 217);
-            this.picMain.TabIndex = 1;
-            this.picMain.TabStop = false;
-            this.picMain.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picMain_MouseMove);
-            this.picMain.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picMain_MouseDown);
-            this.picMain.MouseUp += new System.Windows.Forms.MouseEventHandler(this.picMain_MouseUp);
+            picMain.BackColor = Color.Black;
+            picMain.Cursor = Cursors.Hand;
+            picMain.Location = new Point(14, 47);
+            picMain.Margin = new Padding(4, 3, 4, 3);
+            picMain.Name = "picMain";
+            picMain.Size = new Size(217, 217);
+            picMain.TabIndex = 1;
+            picMain.TabStop = false;
+            picMain.MouseDown += picMain_MouseDown;
+            picMain.MouseMove += picMain_MouseMove;
+            picMain.MouseUp += picMain_MouseUp;
             // 
             // imageList1
             // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "Up-Left.png");
-            this.imageList1.Images.SetKeyName(1, "Up.png");
-            this.imageList1.Images.SetKeyName(2, "Up-Right.png");
-            this.imageList1.Images.SetKeyName(3, "Left.png");
-            this.imageList1.Images.SetKeyName(4, "Center.png");
-            this.imageList1.Images.SetKeyName(5, "Right.png");
-            this.imageList1.Images.SetKeyName(6, "Down-Left.png");
-            this.imageList1.Images.SetKeyName(7, "Down.png");
-            this.imageList1.Images.SetKeyName(8, "Down-Right.png");
-            this.imageList1.Images.SetKeyName(9, "Sticky.png");
-            this.imageList1.Images.SetKeyName(10, "Mario.png");
+            imageList1.ColorDepth = ColorDepth.Depth32Bit;
+            imageList1.ImageStream = (ImageListStreamer)resources.GetObject("imageList1.ImageStream");
+            imageList1.TransparentColor = Color.Transparent;
+            imageList1.Images.SetKeyName(0, "Up-Left.png");
+            imageList1.Images.SetKeyName(1, "Up.png");
+            imageList1.Images.SetKeyName(2, "Up-Right.png");
+            imageList1.Images.SetKeyName(3, "Left.png");
+            imageList1.Images.SetKeyName(4, "Center.png");
+            imageList1.Images.SetKeyName(5, "Right.png");
+            imageList1.Images.SetKeyName(6, "Down-Left.png");
+            imageList1.Images.SetKeyName(7, "Down.png");
+            imageList1.Images.SetKeyName(8, "Down-Right.png");
+            imageList1.Images.SetKeyName(9, "Sticky.png");
+            imageList1.Images.SetKeyName(10, "Mario.png");
             // 
             // picKey
             // 
-            this.picKey.BackColor = System.Drawing.Color.Black;
-            this.picKey.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.picKey.Location = new System.Drawing.Point(246, 41);
-            this.picKey.Name = "picKey";
-            this.picKey.Size = new System.Drawing.Size(73, 97);
-            this.picKey.TabIndex = 2;
-            this.picKey.TabStop = false;
-            this.picKey.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picKey_MouseMove);
-            this.picKey.Click += new System.EventHandler(this.picKey_Click);
+            picKey.BackColor = Color.Black;
+            picKey.Cursor = Cursors.Hand;
+            picKey.Location = new Point(249, 47);
+            picKey.Margin = new Padding(4, 3, 4, 3);
+            picKey.Name = "picKey";
+            picKey.Size = new Size(73, 97);
+            picKey.TabIndex = 2;
+            picKey.TabStop = false;
+            picKey.Click += picKey_Click;
+            picKey.MouseMove += picKey_MouseMove;
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.toolStripStatusLabel2});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 272);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(331, 22);
-            this.statusStrip1.SizingGrip = false;
-            this.statusStrip1.TabIndex = 3;
-            this.statusStrip1.Text = "statusStrip1";
+            statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1, toolStripStatusLabel2 });
+            statusStrip1.Location = new Point(0, 278);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Padding = new Padding(1, 0, 16, 0);
+            statusStrip1.Size = new Size(337, 22);
+            statusStrip1.SizingGrip = false;
+            statusStrip1.TabIndex = 3;
+            statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(316, 17);
-            this.toolStripStatusLabel1.Spring = true;
-            this.toolStripStatusLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            toolStripStatusLabel1.Size = new Size(369, 17);
+            toolStripStatusLabel1.Spring = true;
+            toolStripStatusLabel1.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // toolStripStatusLabel2
             // 
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(0, 17);
+            toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            toolStripStatusLabel2.Size = new Size(0, 17);
             // 
             // picMario
             // 
-            this.picMario.BackColor = System.Drawing.Color.Black;
-            this.picMario.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picMario.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.picMario.Location = new System.Drawing.Point(246, 161);
-            this.picMario.Name = "picMario";
-            this.picMario.Size = new System.Drawing.Size(73, 97);
-            this.picMario.TabIndex = 4;
-            this.picMario.TabStop = false;
+            picMario.BackColor = Color.Black;
+            picMario.BorderStyle = BorderStyle.FixedSingle;
+            picMario.Cursor = Cursors.Hand;
+            picMario.Location = new Point(249, 167);
+            picMario.Margin = new Padding(4, 3, 4, 3);
+            picMario.Name = "picMario";
+            picMario.Size = new Size(73, 97);
+            picMario.TabIndex = 4;
+            picMario.TabStop = false;
             // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(331, 294);
-            this.Controls.Add(this.picMario);
-            this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.picKey);
-            this.Controls.Add(this.picMain);
-            this.Controls.Add(this.mnuMain);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MainMenuStrip = this.mnuMain;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "frmMain";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MAME Joystick Mapper v1.4";
-            this.Load += new System.EventHandler(this.frmMain_Load);
-            this.mnuMain.ResumeLayout(false);
-            this.mnuMain.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picMain)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picKey)).EndInit();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picMario)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(337, 300);
+            Controls.Add(picMario);
+            Controls.Add(statusStrip1);
+            Controls.Add(picKey);
+            Controls.Add(picMain);
+            Controls.Add(mnuMain);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            MainMenuStrip = mnuMain;
+            Margin = new Padding(4, 3, 4, 3);
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "frmMain";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "MAME Joystick Mapper v1.4";
+            Load += frmMain_Load;
+            mnuMain.ResumeLayout(false);
+            mnuMain.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)picMain).EndInit();
+            ((System.ComponentModel.ISupportInitialize)picKey).EndInit();
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)picMario).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 

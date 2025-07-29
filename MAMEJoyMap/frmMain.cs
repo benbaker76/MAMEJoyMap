@@ -11,35 +11,35 @@ namespace MAMEJoyMap
 {
     public partial class frmMain : Form
     {
-        private DirectInput m_directInput = null;
+        private DirectInputManager _directInputManager = null;
 
-        private MapNode[,] m_mainMap = null;
-        private MapNode[,] m_keyMap = null;
+        private MapNode[,] _mainMap = null;
+        private MapNode[,] _keyMap = null;
 
-        private Bitmap m_mainBitmap = null;
-        private Bitmap m_gridBitmap = null;
-        private Bitmap m_mapBitmap = null;
-        private Bitmap m_keyBitmap = null;
-        private Bitmap m_marioBitmap = null;
+        private Bitmap _mainBitmap = null;
+        private Bitmap _gridBitmap = null;
+        private Bitmap _mapBitmap = null;
+        private Bitmap _keyBitmap = null;
+        private Bitmap _marioBitmap = null;
 
-        private Point m_startPoint;
-        private Point m_endPoint;
+        private Point _startPoint;
+        private Point _endPoint;
 
-        private MapNode[] m_lastJoyValue = null;
-        private MapValue m_stickyValue = MapValue.Neutral;
+        private MapNode[] _lastJoyValue = null;
+        private MapValue _stickyValue = MapValue.Neutral;
 
-        private bool m_mouseDown = false;
+        private bool _mouseDown = false;
 
-        private MapNode m_keyedMap = null;
+        private MapNode _keyedMap = null;
 
-        private Point m_marioPoint;
+        private Point _marioPoint;
 
-        private string m_fileName = null;
-        private string m_mapFolder = null;
+        private string _fileName = null;
+        private string _mapFolder = null;
 
-        private string m_map4WayDiagonal = "4444s8888..444458888.444555888.ss5.222555666.222256666.2222s6666.2222s6666";
-        private string m_map4WaySticky = "s8.4s8.44s8.4445";
-        private string m_map8Way = "7778...4445";
+        private string _map4WayDiagonal = "4444s8888..444458888.444555888.ss5.222555666.222256666.2222s6666.2222s6666";
+        private string _map4WaySticky = "s8.4s8.44s8.4445";
+        private string _map8Way = "7778...4445";
 
         public frmMain()
         {
@@ -48,44 +48,44 @@ namespace MAMEJoyMap
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            m_directInput = new DirectInput(this);
-            m_directInput.OnJoyInput += new DirectInput.DIJoyButtonDownHandler(OnJoyInput);
+            _directInputManager = new DirectInputManager(this);
+            _directInputManager.OnJoyInput += new DirectInputManager.DIJoyButtonDownHandler(OnJoyInput);
 
-            m_mapFolder = Path.Combine(Application.StartupPath, "Maps");
+            _mapFolder = Path.Combine(Application.StartupPath, "Maps");
 
-            m_mainMap = new MapNode[9, 9];
-            m_keyMap = new MapNode[3, 4];
+            _mainMap = new MapNode[9, 9];
+            _keyMap = new MapNode[3, 4];
 
-            m_mainBitmap = new Bitmap(217, 217);
-            m_gridBitmap = new Bitmap(217, 217);
-            m_mapBitmap = new Bitmap(217, 217);
+            _mainBitmap = new Bitmap(217, 217);
+            _gridBitmap = new Bitmap(217, 217);
+            _mapBitmap = new Bitmap(217, 217);
 
-            m_keyBitmap = new Bitmap(73, 97);
-            m_marioBitmap = new Bitmap(73, 97);
+            _keyBitmap = new Bitmap(73, 97);
+            _marioBitmap = new Bitmap(73, 97);
 
-            m_marioPoint = new Point(25, 37);
+            _marioPoint = new Point(25, 37);
 
-            picMain.Image = m_mainBitmap;
-            picKey.Image = m_keyBitmap;
-            picMario.Image = m_marioBitmap;
+            picMain.Image = _mainBitmap;
+            picKey.Image = _keyBitmap;
+            picMario.Image = _marioBitmap;
 
-            m_lastJoyValue = new MapNode[8];
+            _lastJoyValue = new MapNode[8];
 
             for (int i = 0; i < 8; i++)
-                m_lastJoyValue[i] = new MapNode(0, 0, ImageType.Neutral);
+                _lastJoyValue[i] = new MapNode(0, 0, ImageType.Neutral);
 
             for (int y = 0; y < 9; y++)
                 for (int x = 0; x < 9; x++)
-                    m_mainMap[x, y] = new MapNode(x * 25, y * 25, ImageType.Neutral);
+                    _mainMap[x, y] = new MapNode(x * 25, y * 25, ImageType.Neutral);
 
             int count = 0;
 
             for (int y = 0; y < 4; y++)
                 for (int x = 0; x < 3; x++)
                     if (count < imageList1.Images.Count - 1)
-                        m_keyMap[x, y] = new MapNode(x * 25, y * 25, (ImageType)count++);
+                        _keyMap[x, y] = new MapNode(x * 25, y * 25, (ImageType)count++);
 
-            using (Graphics g = Graphics.FromImage(m_gridBitmap))
+            using (Graphics g = Graphics.FromImage(_gridBitmap))
             {
                 DrawGrayGrid(g);
                 DrawBlackGrid(g);
@@ -100,22 +100,22 @@ namespace MAMEJoyMap
         {
             Point p = new Point((int)(((double)(e.JoyState.X + 255) / 510.0) * 217.0) / 25, (int)(((double)(e.JoyState.Y + 255) / 510.0) * 217.0) / 25);
 
-            if (m_lastJoyValue != null)
-                m_lastJoyValue[e.JoyId].JoyPos = false;
+            if (_lastJoyValue != null)
+                _lastJoyValue[e.JoyId].JoyPos = false;
 
-            m_mainMap[p.X, p.Y].JoyPos = true;
-            bool sticky = (m_mainMap[p.X, p.Y].MapValue == MapValue.Sticky);
+            _mainMap[p.X, p.Y].JoyPos = true;
+            bool sticky = (_mainMap[p.X, p.Y].MapValue == MapValue.Sticky);
 
             if (!sticky)
-                m_stickyValue = m_mainMap[p.X, p.Y].MapValue;
+                _stickyValue = _mainMap[p.X, p.Y].MapValue;
 
-            MapNode mapNode = (sticky ? m_lastJoyValue[e.JoyId] : m_mainMap[p.X, p.Y]);
-            MapValue mapValue = (sticky ? m_stickyValue : mapNode.MapValue);
+            MapNode mapNode = (sticky ? _lastJoyValue[e.JoyId] : _mainMap[p.X, p.Y]);
+            MapValue mapValue = (sticky ? _stickyValue : mapNode.MapValue);
 
-            if (mapNode != m_lastJoyValue[e.JoyId])
+            if (mapNode != _lastJoyValue[e.JoyId])
                 toolStripStatusLabel1.Text = mapValue.ToString();
 
-            m_lastJoyValue[e.JoyId] = m_mainMap[p.X, p.Y];
+            _lastJoyValue[e.JoyId] = _mainMap[p.X, p.Y];
 
             if (TryMoveMario(mapValue))
                 DrawMario();
@@ -125,7 +125,7 @@ namespace MAMEJoyMap
 
         private void DrawKey()
         {
-            using (Graphics g = Graphics.FromImage(m_keyBitmap))
+            using (Graphics g = Graphics.FromImage(_keyBitmap))
             {
                 g.Clear(Color.FromArgb(207, 215, 196));
 
@@ -136,7 +136,7 @@ namespace MAMEJoyMap
                     for (int y = 0; y < 4; y++)
                         for (int x = 0; x < 3; x++)
                             if (count++ < imageList1.Images.Count - 1)
-                                if (m_keyMap[x, y].Selected)
+                                if (_keyMap[x, y].Selected)
                                     g.FillRectangle(sb, x * 24, y * 24, 24, 24);
                 }
 
@@ -174,7 +174,7 @@ namespace MAMEJoyMap
             {
                 for (int y = 0; y < 9; y++)
                     for (int x = 0; x < 9; x++)
-                        if (m_mainMap[x, y].Selected)
+                        if (_mainMap[x, y].Selected)
                             g.FillRectangle(sb, x * 24, y * 24, 24, 24);
             }
         }
@@ -185,7 +185,7 @@ namespace MAMEJoyMap
             {
                 for (int y = 0; y < 9; y++)
                     for (int x = 0; x < 9; x++)
-                        if (m_mainMap[x, y].JoyPos)
+                        if (_mainMap[x, y].JoyPos)
                             g.FillRectangle(sb, x * 24, y * 24, 24, 24);
             }
         }
@@ -222,30 +222,30 @@ namespace MAMEJoyMap
 
         private void DrawGrid(Graphics g)
         {
-            g.DrawImageUnscaled(m_gridBitmap, 0, 0);
+            g.DrawImageUnscaled(_gridBitmap, 0, 0);
         }
 
         private void DrawMap(Graphics g)
         {
-            g.DrawImageUnscaled(m_mapBitmap, 0, 0);
+            g.DrawImageUnscaled(_mapBitmap, 0, 0);
         }
 
         private void UpdateMap()
         {
-            using (Graphics g = Graphics.FromImage(m_mapBitmap))
+            using (Graphics g = Graphics.FromImage(_mapBitmap))
             {
                 g.Clear(Color.FromArgb(0, 0, 0, 0));
 
                 for (int y = 0; y < 9; y++)
                     for (int x = 0; x < 9; x++)
-                        if ((int)m_mainMap[x, y].ImageType < imageList1.Images.Count - 1)
-                            g.DrawImageUnscaled(imageList1.Images[(int)m_mainMap[x, y].ImageType], x * 24 + 1, y * 24 + 1);
+                        if ((int)_mainMap[x, y].ImageType < imageList1.Images.Count - 1)
+                            g.DrawImageUnscaled(imageList1.Images[(int)_mainMap[x, y].ImageType], x * 24 + 1, y * 24 + 1);
             }
         }
 
         private void DrawMap(bool updateMap)
         {
-            using (Graphics g = Graphics.FromImage(m_mainBitmap))
+            using (Graphics g = Graphics.FromImage(_mainBitmap))
             {
                 DrawBackground(g);
                 DrawSelection(g);
@@ -263,13 +263,13 @@ namespace MAMEJoyMap
 
         private void DrawMario()
         {
-            using (Graphics g = Graphics.FromImage(m_marioBitmap))
+            using (Graphics g = Graphics.FromImage(_marioBitmap))
             {
                 g.Clear(Color.FromArgb(207, 215, 196));
 
                 using (SolidBrush sb = new SolidBrush(Color.Red))
-                    if(10 < imageList1.Images.Count)
-                        g.DrawImageUnscaled(imageList1.Images[10], m_marioPoint.X, m_marioPoint.Y);
+                    if (10 < imageList1.Images.Count)
+                        g.DrawImageUnscaled(imageList1.Images[10], _marioPoint.X, _marioPoint.Y);
             }
 
             picMario.Invalidate();
@@ -282,39 +282,39 @@ namespace MAMEJoyMap
 
             if ((mapValue & (int)MapType.Up) > 0)
             {
-                m_marioPoint.Y -= 2;
+                _marioPoint.Y -= 2;
 
-                if (m_marioPoint.Y >= 0)
+                if (_marioPoint.Y >= 0)
                     moveMario = true;
                 else
-                    m_marioPoint.Y = 74;
+                    _marioPoint.Y = 74;
             }
             if ((mapValue & (int)MapType.Left) > 0)
             {
-                m_marioPoint.X -= 2;
+                _marioPoint.X -= 2;
 
-                if (m_marioPoint.X >= 0)
+                if (_marioPoint.X >= 0)
                     moveMario = true;
                 else
-                    m_marioPoint.X = 50;
+                    _marioPoint.X = 50;
             }
             if ((mapValue & (int)MapType.Right) > 0)
             {
-                m_marioPoint.X += 2;
+                _marioPoint.X += 2;
 
-                if (m_marioPoint.X <= 50)
+                if (_marioPoint.X <= 50)
                     moveMario = true;
                 else
-                    m_marioPoint.X = 0;
+                    _marioPoint.X = 0;
             }
             if ((mapValue & (int)MapType.Down) > 0)
             {
-                m_marioPoint.Y += 2;
+                _marioPoint.Y += 2;
 
-                if (m_marioPoint.Y <= 74)
+                if (_marioPoint.Y <= 74)
                     moveMario = true;
                 else
-                    m_marioPoint.Y = 0;
+                    _marioPoint.Y = 0;
             }
 
             return moveMario;
@@ -322,8 +322,8 @@ namespace MAMEJoyMap
 
         private void UpdateMainSelection()
         {
-            Point startPoint = new Point(m_startPoint.X < m_endPoint.X ? m_startPoint.X : m_endPoint.X, m_startPoint.Y < m_endPoint.Y ? m_startPoint.Y : m_endPoint.Y);
-            Point endPoint = new Point(m_endPoint.X > m_startPoint.X ? m_endPoint.X : m_startPoint.X, m_endPoint.Y > m_startPoint.Y ? m_endPoint.Y : m_startPoint.Y);
+            Point startPoint = new Point(_startPoint.X < _endPoint.X ? _startPoint.X : _endPoint.X, _startPoint.Y < _endPoint.Y ? _startPoint.Y : _endPoint.Y);
+            Point endPoint = new Point(_endPoint.X > _startPoint.X ? _endPoint.X : _startPoint.X, _endPoint.Y > _startPoint.Y ? _endPoint.Y : _startPoint.Y);
 
             Rectangle selectRect = new Rectangle(startPoint.X, startPoint.Y, endPoint.X - startPoint.X, endPoint.Y - startPoint.Y);
 
@@ -333,26 +333,26 @@ namespace MAMEJoyMap
             {
                 for (int x = 0; x < 9; x++)
                 {
-                    if (selectRect.IntersectsWith(m_mainMap[x, y].Rectangle))
+                    if (selectRect.IntersectsWith(_mainMap[x, y].Rectangle))
                     {
-                        if (!m_mainMap[x, y].Selected)
+                        if (!_mainMap[x, y].Selected)
                         {
-                            m_mainMap[x, y].Selected = true;
+                            _mainMap[x, y].Selected = true;
                             drawMap = true;
                         }
                     }
                     else
                     {
-                        if (m_mainMap[x, y].Selected)
+                        if (_mainMap[x, y].Selected)
                         {
-                            m_mainMap[x, y].Selected = false;
+                            _mainMap[x, y].Selected = false;
                             drawMap = true;
                         }
                     }
                 }
             }
 
-            if(drawMap)
+            if (drawMap)
                 DrawMap(false);
         }
 
@@ -362,8 +362,8 @@ namespace MAMEJoyMap
             {
                 for (int x = 0; x < 9; x++)
                 {
-                    if (m_mainMap[x, y].Rectangle.Contains(m_endPoint))
-                        toolStripStatusLabel1.Text = m_mainMap[x, y].ImageType.ToString();
+                    if (_mainMap[x, y].Rectangle.Contains(_endPoint))
+                        toolStripStatusLabel1.Text = _mainMap[x, y].ImageType.ToString();
                 }
             }
         }
@@ -371,7 +371,7 @@ namespace MAMEJoyMap
         private void UpdateKey(Point p)
         {
             int count = 0;
-            m_keyedMap = null;
+            _keyedMap = null;
 
             for (int y = 0; y < 4; y++)
             {
@@ -379,15 +379,15 @@ namespace MAMEJoyMap
                 {
                     if (count++ < imageList1.Images.Count - 1)
                     {
-                        if (m_keyMap[x, y].Rectangle.Contains(p))
+                        if (_keyMap[x, y].Rectangle.Contains(p))
                         {
-                            m_keyMap[x, y].Selected = true;
-                            m_keyedMap = m_keyMap[x, y];
+                            _keyMap[x, y].Selected = true;
+                            _keyedMap = _keyMap[x, y];
 
-                            toolStripStatusLabel1.Text = m_keyedMap.ImageType.ToString();
+                            toolStripStatusLabel1.Text = _keyedMap.ImageType.ToString();
                         }
                         else
-                            m_keyMap[x, y].Selected = false;
+                            _keyMap[x, y].Selected = false;
                     }
                 }
             }
@@ -397,16 +397,16 @@ namespace MAMEJoyMap
         {
             for (int y = 0; y < 9; y++)
                 for (int x = 0; x < 9; x++)
-                    m_mainMap[x, y].ImageType = ImageType.Neutral;
+                    _mainMap[x, y].ImageType = ImageType.Neutral;
         }
 
         private void OpenMapFile()
         {
             ClearMap();
 
-            string[] iniFile = File.ReadAllLines(m_fileName);
+            string[] iniFile = File.ReadAllLines(_fileName);
 
-            for(int i=0; i<iniFile.Length; i++)
+            for (int i = 0; i < iniFile.Length; i++)
             {
                 if (iniFile[i].StartsWith("joystick_map"))
                 {
@@ -486,7 +486,7 @@ namespace MAMEJoyMap
                     {
                         if (strMap[y].Length == 0 && y > 0)
                         {
-                            m_mainMap[x, y].ImageType = m_mainMap[x, y - 1].ImageType;
+                            _mainMap[x, y].ImageType = _mainMap[x, y - 1].ImageType;
 
                             continue;
                         }
@@ -496,43 +496,43 @@ namespace MAMEJoyMap
                             switch (strMap[y][x])
                             {
                                 case (char)MapChar.UpLeft:
-                                    m_mainMap[x, y].ImageType = ImageType.UpLeft;
+                                    _mainMap[x, y].ImageType = ImageType.UpLeft;
                                     break;
                                 case (char)MapChar.Up:
-                                    m_mainMap[x, y].ImageType = ImageType.Up;
+                                    _mainMap[x, y].ImageType = ImageType.Up;
                                     break;
                                 case (char)MapChar.UpRight:
-                                    m_mainMap[x, y].ImageType = ImageType.UpRight;
+                                    _mainMap[x, y].ImageType = ImageType.UpRight;
                                     break;
                                 case (char)MapChar.Left:
-                                    m_mainMap[x, y].ImageType = ImageType.Left;
+                                    _mainMap[x, y].ImageType = ImageType.Left;
                                     break;
                                 case (char)MapChar.Neutral:
-                                    m_mainMap[x, y].ImageType = ImageType.Neutral;
+                                    _mainMap[x, y].ImageType = ImageType.Neutral;
                                     break;
                                 case (char)MapChar.Right:
-                                    m_mainMap[x, y].ImageType = ImageType.Right;
+                                    _mainMap[x, y].ImageType = ImageType.Right;
                                     break;
                                 case (char)MapChar.DownLeft:
-                                    m_mainMap[x, y].ImageType = ImageType.DownLeft;
+                                    _mainMap[x, y].ImageType = ImageType.DownLeft;
                                     break;
                                 case (char)MapChar.Down:
-                                    m_mainMap[x, y].ImageType = ImageType.Down;
+                                    _mainMap[x, y].ImageType = ImageType.Down;
                                     break;
                                 case (char)MapChar.DownRight:
-                                    m_mainMap[x, y].ImageType = ImageType.DownRight;
+                                    _mainMap[x, y].ImageType = ImageType.DownRight;
                                     break;
                                 case (char)MapChar.Sticky:
-                                    m_mainMap[x, y].ImageType = ImageType.Sticky;
+                                    _mainMap[x, y].ImageType = ImageType.Sticky;
                                     break;
                             }
                         }
                         else
                         {
                             if (x < 5 && x > 0)
-                                m_mainMap[x, y].ImageType = m_mainMap[x - 1, y].ImageType;
+                                _mainMap[x, y].ImageType = _mainMap[x - 1, y].ImageType;
                             else
-                                m_mainMap[x, y].ImageType = GetColumnMirrorImage(m_mainMap[8 - x, y].MapValue);
+                                _mainMap[x, y].ImageType = GetColumnMirrorImage(_mainMap[8 - x, y].MapValue);
                         }
                     }
                 }
@@ -541,9 +541,9 @@ namespace MAMEJoyMap
                     for (int x = 0; x < 9; x++)
                     {
                         if (y < 5 && y > 0)
-                            m_mainMap[x, y].ImageType = m_mainMap[x, y - 1].ImageType;
+                            _mainMap[x, y].ImageType = _mainMap[x, y - 1].ImageType;
                         else
-                            m_mainMap[x, y].ImageType = GetRowMirrorImage(m_mainMap[x, 8 - y].MapValue);
+                            _mainMap[x, y].ImageType = GetRowMirrorImage(_mainMap[x, 8 - y].MapValue);
                     }
                 }
             }
@@ -557,7 +557,7 @@ namespace MAMEJoyMap
             {
                 for (int x = 0; x < 9; x++)
                 {
-                    switch (m_mainMap[x, y].ImageType)
+                    switch (_mainMap[x, y].ImageType)
                     {
                         case ImageType.UpLeft:
                             strMap += (char)MapChar.UpLeft;
@@ -602,8 +602,8 @@ namespace MAMEJoyMap
         {
             List<string> iniFile = new List<string>();
 
-            if (File.Exists(m_fileName))
-                iniFile.AddRange(File.ReadAllLines(m_fileName));
+            if (File.Exists(_fileName))
+                iniFile.AddRange(File.ReadAllLines(_fileName));
 
             string strMap = String.Format("joystick_map {0}", MapToString());
             bool found = false;
@@ -620,23 +620,23 @@ namespace MAMEJoyMap
             if (!found)
                 iniFile.Add(strMap);
 
-            File.WriteAllLines(m_fileName, iniFile.ToArray());
+            File.WriteAllLines(_fileName, iniFile.ToArray());
         }
 
         private void picMain_MouseDown(object sender, MouseEventArgs e)
         {
-            m_startPoint = new Point(e.X, e.Y);
-            m_endPoint = new Point(e.X, e.Y);
-            m_mouseDown = true;
+            _startPoint = new Point(e.X, e.Y);
+            _endPoint = new Point(e.X, e.Y);
+            _mouseDown = true;
 
             UpdateMainSelection();
         }
 
         private void picMain_MouseMove(object sender, MouseEventArgs e)
         {
-            m_endPoint = new Point(e.X, e.Y);
+            _endPoint = new Point(e.X, e.Y);
 
-            if (m_mouseDown)
+            if (_mouseDown)
                 UpdateMainSelection();
             else
                 UpdateMainSelectionName();
@@ -644,23 +644,23 @@ namespace MAMEJoyMap
 
         private void picMain_MouseUp(object sender, MouseEventArgs e)
         {
-            m_endPoint = new Point(e.X, e.Y);
-            m_mouseDown = false;
+            _endPoint = new Point(e.X, e.Y);
+            _mouseDown = false;
 
             UpdateMainSelection();
         }
 
         private void picKey_Click(object sender, EventArgs e)
         {
-            if (m_keyedMap == null)
+            if (_keyedMap == null)
                 return;
 
             for (int y = 0; y < 9; y++)
             {
                 for (int x = 0; x < 9; x++)
                 {
-                    if (m_mainMap[x, y].Selected)
-                        m_mainMap[x, y].ImageType = m_keyedMap.ImageType;
+                    if (_mainMap[x, y].Selected)
+                        _mainMap[x, y].ImageType = _keyedMap.ImageType;
                 }
             }
 
@@ -676,9 +676,9 @@ namespace MAMEJoyMap
 
         private void mnuOpen_Click(object sender, EventArgs e)
         {
-            if (FileIO.TryOpenFile(this, m_mapFolder, null, ".ini", out m_fileName))
+            if (FileIO.TryOpenFile(this, _mapFolder, null, ".ini", out _fileName))
             {
-                toolStripStatusLabel2.Text = Path.GetFileNameWithoutExtension(m_fileName);
+                toolStripStatusLabel2.Text = Path.GetFileNameWithoutExtension(_fileName);
                 OpenMapFile();
             }
 
@@ -686,19 +686,19 @@ namespace MAMEJoyMap
 
         private void mnuSaveAs_Click(object sender, EventArgs e)
         {
-            if (FileIO.TrySaveFile(this, m_mapFolder, null, ".ini", out m_fileName))
+            if (FileIO.TrySaveFile(this, _mapFolder, null, ".ini", out _fileName))
             {
-                toolStripStatusLabel2.Text = Path.GetFileNameWithoutExtension(m_fileName);
+                toolStripStatusLabel2.Text = Path.GetFileNameWithoutExtension(_fileName);
                 SaveMapFile();
             }
         }
 
         private void mnuSave_Click(object sender, EventArgs e)
         {
-            if (!File.Exists(m_fileName))
+            if (!File.Exists(_fileName))
             {
-                toolStripStatusLabel2.Text = Path.GetFileNameWithoutExtension(m_fileName);
-                FileIO.TrySaveFile(this, m_mapFolder, null, ".ini", out m_fileName);
+                toolStripStatusLabel2.Text = Path.GetFileNameWithoutExtension(_fileName);
+                FileIO.TrySaveFile(this, _mapFolder, null, ".ini", out _fileName);
             }
 
             SaveMapFile();
@@ -706,19 +706,19 @@ namespace MAMEJoyMap
 
         private void mnu4WayDiagonal_Click(object sender, EventArgs e)
         {
-            MapStrToMap(m_map4WayDiagonal);
+            MapStrToMap(_map4WayDiagonal);
             toolStripStatusLabel2.Text = "4 Way Diagonal";
         }
 
         private void mnu4WaySticky_Click(object sender, EventArgs e)
         {
-            MapStrToMap(m_map4WaySticky);
+            MapStrToMap(_map4WaySticky);
             toolStripStatusLabel2.Text = "4 Way Sticky";
         }
 
         private void mnu8Way_Click(object sender, EventArgs e)
         {
-            MapStrToMap(m_map8Way);
+            MapStrToMap(_map8Way);
             toolStripStatusLabel2.Text = "8 Way";
         }
 
